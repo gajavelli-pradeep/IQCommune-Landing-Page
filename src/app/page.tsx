@@ -11,8 +11,22 @@ export default function Home() {
       {/* Background Interactive Canvas */}
       <NetworkBackground />
 
-      {/* Watermark Logo */}
+      {/* Background Watermark Logo */}
       <WatermarkLogo />
+
+      {/* Top Left Logo & Brand */}
+      <div className="absolute top-6 left-6 sm:top-8 sm:left-10 z-20 flex items-center gap-3 select-none">
+        <img
+          src="/logo.png"
+          alt="iqcommune logo"
+          className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl shadow-lg border border-[rgba(201,152,42,0.25)] hover:scale-105 transition-transform duration-300"
+        />
+        <span className="font-bold text-xl sm:text-2xl tracking-[-0.03em] flex items-baseline">
+          <span className="text-[#c9982a]">iq</span>
+          <span className="text-[#f8f7f4] font-light">commune</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#3a8a3a] ml-1" />
+        </span>
+      </div>
 
       {/* Main Content */}
       <div className="relative z-10 text-center max-w-[620px] w-full my-auto">
