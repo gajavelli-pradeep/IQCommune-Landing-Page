@@ -98,7 +98,7 @@ export async function POST(req: Request) {
           console.error("[Brevo Admin Email Error]:", adminData);
         }
 
-        // B) Send Automated Thank You / Confirmation Email to User / Customer
+        // B) Send Automated Personal Transactional Confirmation Email to User / Customer
         if (sendCustomerEmail) {
           const userRes = await fetch("https://api.brevo.com/v3/smtp/email", {
             method: "POST",
@@ -109,50 +109,39 @@ export async function POST(req: Request) {
             body: JSON.stringify({
               sender: { name: senderName, email: senderEmail },
               to: [{ email: email }],
-              subject: "Your Invitation Request — iqcommune",
+              subject: "Invitation Request Confirmed — iqcommune",
+              tags: ["transactional-confirmation"],
+              headers: {
+                "X-Mailin-Tag": "transactional-confirmation",
+                "X-Auto-Response-Suppress": "OOF, AutoReply",
+              },
               htmlContent: `
-                <div style="font-family: 'DM Sans', Helvetica, Arial, sans-serif; background-color: #0f1117; color: #f8f7f4; padding: 40px 24px; max-width: 580px; margin: auto; border-radius: 16px; border: 1px solid rgba(201, 152, 42, 0.3);">
+                <div style="font-family: Arial, Helvetica, sans-serif; background-color: #0f1117; color: #f8f7f4; padding: 36px 20px; max-width: 560px; margin: auto; border-radius: 12px; border: 1px solid #c9982a;">
                   
-                  <!-- Logo -->
-                  <div style="margin-bottom: 28px;">
-                    <span style="font-size: 32px; font-weight: 700; color: #c9982a; letter-spacing: -1px;">iq</span><span style="font-size: 32px; font-weight: 300; color: #f8f7f4; letter-spacing: -1px;">commune</span><span style="display: inline-block; width: 6px; height: 6px; background-color: #3a8a3a; border-radius: 50%; margin-left: 4px;"></span>
+                  <div style="font-size: 24px; font-weight: bold; color: #c9982a; margin-bottom: 20px;">
+                    iqcommune<span style="color:#3a8a3a;">.</span>
                   </div>
 
-                  <!-- Main Content -->
-                  <h1 style="font-size: 20px; font-weight: 600; color: #f8f7f4; margin-bottom: 16px;">
-                    Your Invitation Request is Confirmed
-                  </h1>
-
-                  <p style="font-size: 14px; line-height: 1.7; color: #9496a1; margin-bottom: 24px;">
-                    Thank you for your interest in joining <strong>iqcommune</strong>. A room is taking shape — real professionals, real sessions, no pitch, no product.
+                  <p style="font-size: 15px; color: #f8f7f4; line-height: 1.6; margin-bottom: 16px;">
+                    Hi there,
                   </p>
 
-                  <!-- Profile Summary Card -->
-                  <div style="background-color: rgba(201, 152, 42, 0.08); border: 1px solid rgba(201, 152, 42, 0.25); padding: 18px 20px; border-radius: 12px; margin-bottom: 24px;">
-                    <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #e0c870; font-weight: 700; margin-bottom: 8px;">
-                      Request Details
-                    </div>
-                    <div style="font-size: 13px; color: #f8f7f4; margin-bottom: 4px;">
-                      <strong>City:</strong> <span style="color: #e0c870;">${city}</span>
-                    </div>
-                    <div style="font-size: 13px; color: #f8f7f4;">
-                      <strong>Profile:</strong> ${role}
-                    </div>
+                  <p style="font-size: 14px; color: #9496a1; line-height: 1.6; margin-bottom: 20px;">
+                    Thank you for requesting an invitation to <strong>iqcommune</strong>. We have logged your details for an upcoming session in <strong>${city}</strong>.
+                  </p>
+
+                  <div style="background-color: #181b24; padding: 16px; border-radius: 8px; border-left: 3px solid #c9982a; margin-bottom: 20px;">
+                    <div style="font-size: 13px; color: #f8f7f4;"><strong>City:</strong> <span style="color: #e0c870;">${city}</span></div>
+                    <div style="font-size: 13px; color: #f8f7f4; margin-top: 4px;"><strong>Profile:</strong> ${role}</div>
                   </div>
 
-                  <p style="font-size: 14px; line-height: 1.7; color: #9496a1; margin-bottom: 32px;">
-                    We curate sessions city by city across India to ensure high-density peer conversations. As soon as the upcoming room in <strong>${city}</strong> opens for your cohort, we will reach out directly with your private access pass.
+                  <p style="font-size: 14px; color: #9496a1; line-height: 1.6; margin-bottom: 24px;">
+                    Sessions are strictly curated by city and domain to ensure real, high-value peer conversations. As soon as the room opens in ${city}, we will send your private access pass directly.
                   </p>
 
-                  <!-- Signature -->
-                  <div style="border-top: 1px solid rgba(148, 150, 161, 0.2); padding-top: 20px; text-align: left;">
-                    <div style="font-size: 13px; font-weight: 600; color: #f8f7f4;">${senderName} Team</div>
-                    <div style="font-size: 12px; color: #9496a1; margin-top: 2px;">Insight Quotient — Unleashed</div>
-                    
-                    <div style="margin-top: 16px;">
-                      <a href="https://linkedin.com/company/iqcommune" style="font-size: 12px; color: #c9982a; text-decoration: none; margin-right: 16px;">LinkedIn @iqcommune</a>
-                      <a href="https://instagram.com/iqcommune" style="font-size: 12px; color: #c9982a; text-decoration: none;">Instagram @iqcommune</a>
-                    </div>
+                  <div style="border-top: 1px solid #222; padding-top: 16px; font-size: 13px; color: #f8f7f4;">
+                    <strong>InvestQ Commune Team</strong><br/>
+                    <span style="font-size: 12px; color: #9496a1;">Insight Quotient — Unleashed</span>
                   </div>
 
                 </div>
