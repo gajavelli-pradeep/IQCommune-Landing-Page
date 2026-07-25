@@ -36,7 +36,12 @@ export const metadata: Metadata = {
     description:
       "Real practitioners. Real sessions. No scripts. No slides. No pitch. Just conversation.",
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.svg",
+  },
 };
+
 
 export default function RootLayout({
   children,
