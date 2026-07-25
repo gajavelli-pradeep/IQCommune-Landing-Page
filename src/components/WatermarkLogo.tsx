@@ -10,17 +10,6 @@ export default function WatermarkLogo() {
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
       >
-        {/* Subtle rounded brand outline */}
-        <rect
-          x="25"
-          y="25"
-          width="450"
-          height="450"
-          rx="96"
-          stroke="#c9982a"
-          strokeWidth="14"
-          strokeOpacity="0.35"
-        />
 
         {/* 'i' in Gold (#c9982a) */}
         <circle cx="175" cy="135" r="24" fill="#c9982a" />
