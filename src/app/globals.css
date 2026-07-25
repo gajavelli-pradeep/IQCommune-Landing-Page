@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0f1117;
+  --ink-muted: #9496a1;
+  --gold: #c9982a;
+  --gold-light: #f5e9c8;
+  --gold-dark: #e0c870;
+  --green: #3a8a3a;
+  --cream: #f8f7f4;
+}
+
+@theme {
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-green: var(--green);
+  --color-cream: var(--cream);
+  --font-dm: var(--font-dm-sans), sans-serif;
+}
+
+html, body {
+  background-color: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-dm-sans), sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Glassmorphism & custom glowing effects */
+.glass-badge {
+  background: rgba(201, 152, 42, 0.08);
+  border: 1px solid rgba(201, 152, 42, 0.35);
+  box-shadow: 0 0 20px rgba(201, 152, 42, 0.08);
+}
+
+.glass-card {
+  background: rgba(24, 27, 36, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 152, 42, 0.2);
+}
+
+.glass-input {
+  background: rgba(15, 17, 23, 0.8);
+  border: 1px solid rgba(201, 152, 42, 0.3);
+  color: var(--cream);
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(201, 152, 42, 0.25);
+}
+
+/* Pulsing dot animation */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Subtly glowing text */
+.text-glow-gold {
+  text-shadow: 0 0 16px rgba(201, 152, 42, 0.35);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 152, 42, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
